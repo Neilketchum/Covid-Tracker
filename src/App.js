@@ -4,6 +4,9 @@ import Map from './Map'
 import InfoBox from './InfoBox';
 import Table from './Table';
 import './App.css';
+import { sortData } from './util';
+import { Line } from 'react-chartjs-2';
+import LineGraph from './LineGraph';
 function App() {
   const [countries,setCountries] = useState([]);
   const [country,setCountry] = useState("Worldwide");
@@ -20,8 +23,9 @@ function App() {
            name:country.country,
            value:country.countryInfo.iso2,
          }));
+         const sortedData = sortData(data);
         setCountries(countries);
-        setTableData(data);
+        setTableData(sortedData);
        })
      }
      getCountriesData();
@@ -63,18 +67,17 @@ function App() {
           <InfoBox title = "Deaths" cases = {countryInfo.todayDeaths} total = {countryInfo.deaths}></InfoBox>
         </div>
         <Map></Map>  
-      </div>
-  
-      
+      </div>     
       <Card className="app_right">
           <CardContent>
             <h3>Live Cases By Country</h3>
             {/* Table */}
             <Table countries = {tableData} ></Table>
             <h3>Worldwide New Cases</h3>
+            <LineGraph></LineGraph>
           </CardContent>
       </Card>
-       
+        
 
     </div>
   );
