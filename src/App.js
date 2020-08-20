@@ -14,7 +14,9 @@ function App() {
   const [countryInfo,setCountryInfo] = useState([]);
   const [tableData,setTableData] = useState([]);
   const [mapCenter,setMapCenter] = useState({lat:23.0225,lng:72.5714});
-  const [mapZoom,setMapZoom] = useState(4.5);
+  const [mapZoom,setMapZoom] = useState(2.5);
+  const [mapCountries,setMapCountries]  = useState([]);
+  const [casesType, setCasesType] = useState("cases");
   // Code inside here will run once when to component loads and not again.
     // Async Sending a request
    useEffect(() => {
@@ -29,6 +31,7 @@ function App() {
          const sortedData = sortData(data);
         setCountries(countries);
         setTableData(sortedData);
+        setMapCountries(data);
        })
      }
      getCountriesData();
@@ -40,13 +43,21 @@ function App() {
   }, [])
   const onCountryChange = async (event)=>{
     const countryCode = event.target.value;
-    setCountry(countryCode);
-    const url = countryCode === 'Worldwide'?'https://disease.sh/v3/covid-19/all':`https://disease.sh/v3/covid-19/countries/${countryCode}?strict=true`
-    await fetch(url).then(response => response.json()).then(data=>{
-        setCountryInfo(data)
-    })
+    console.log(countryCode);
+    if(countryCode === 'PK'){
+      alert("Terrorist are not alowd here")
+    }else{
+      setCountry(countryCode);
+      const url = countryCode === 'Worldwide'?'https://disease.sh/v3/covid-19/all':`https://disease.sh/v3/covid-19/countries/${countryCode}?strict=true`
+      await fetch(url).then(response => response.json()).then(data=>{
+          setCountryInfo(data)
+          setMapCenter([data.countryInfo.lat,data.countryInfo.long])
+          setMapZoom(5);
+      })
+    }
+    
   }
-  console.log(countryInfo)
+
   return (
     <div className="App">
       <div className="app_left">
@@ -69,7 +80,7 @@ function App() {
           <InfoBox title = "Recovered" cases = {countryInfo.todayRecovered} total = {countryInfo.recovered}></InfoBox>
           <InfoBox title = "Deaths" cases = {countryInfo.todayDeaths} total = {countryInfo.deaths}></InfoBox>
         </div>
-        <Map mapZoom = {mapZoom} mapCenter = {mapCenter}></Map>  
+        <Map mapZoom = {mapZoom} mapCenter = {mapCenter} countries = {mapCountries} casesType={casesType}></Map>  
       </div>     
       <Card className="app_right">
           <CardContent>
