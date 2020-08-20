@@ -7,11 +7,14 @@ import './App.css';
 import { sortData } from './util';
 import { Line } from 'react-chartjs-2';
 import LineGraph from './LineGraph';
+import "leaflet/dist/leaflet.css"
 function App() {
   const [countries,setCountries] = useState([]);
   const [country,setCountry] = useState("Worldwide");
   const [countryInfo,setCountryInfo] = useState([]);
   const [tableData,setTableData] = useState([]);
+  const [mapCenter,setMapCenter] = useState({lat:23.0225,lng:72.5714});
+  const [mapZoom,setMapZoom] = useState(4.5);
   // Code inside here will run once when to component loads and not again.
     // Async Sending a request
    useEffect(() => {
@@ -66,7 +69,7 @@ function App() {
           <InfoBox title = "Recovered" cases = {countryInfo.todayRecovered} total = {countryInfo.recovered}></InfoBox>
           <InfoBox title = "Deaths" cases = {countryInfo.todayDeaths} total = {countryInfo.deaths}></InfoBox>
         </div>
-        <Map></Map>  
+        <Map mapZoom = {mapZoom} mapCenter = {mapCenter}></Map>  
       </div>     
       <Card className="app_right">
           <CardContent>
