@@ -4,9 +4,10 @@ import Map from './Map'
 import InfoBox from './InfoBox';
 import Table from './Table';
 import './App.css';
-import { sortData } from './util';
+import { sortData,prettyPrintStat } from './util';
 import { Line } from 'react-chartjs-2';
 import LineGraph from './LineGraph';
+import './infoBox.css'
 import "leaflet/dist/leaflet.css"
 function App() {
   const [countries,setCountries] = useState([]);
@@ -76,9 +77,9 @@ function App() {
         
         {/* infoBox */}
         <div className="app_stats">
-          <InfoBox title = "Coronavirus Cases" cases = {countryInfo.todayCases} total = {countryInfo.cases}></InfoBox>
-          <InfoBox title = "Recovered" cases = {countryInfo.todayRecovered} total = {countryInfo.recovered}></InfoBox>
-          <InfoBox title = "Deaths" cases = {countryInfo.todayDeaths} total = {countryInfo.deaths}></InfoBox>
+          <InfoBox title = "Coronavirus Cases" cases = {prettyPrintStat(countryInfo.todayCases)} total = {countryInfo.cases}></InfoBox>
+          <InfoBox title = "Recovered" cases = {prettyPrintStat(countryInfo.todayRecovered)} total = {countryInfo.recovered}></InfoBox>
+          <InfoBox title = "De aths" cases = {prettyPrintStat(countryInfo.todayDeaths)} total = {countryInfo.deaths}></InfoBox>
         </div>
         <Map mapZoom = {mapZoom} mapCenter = {mapCenter} countries = {mapCountries} casesType={casesType}></Map>  
       </div>     
