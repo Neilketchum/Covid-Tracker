@@ -7,6 +7,8 @@ body{
 .App{
   display: flex;
   justify-content: space-evenly;
+  background-color: #f5f6fa;
+  padding: 20px;
 }
 .app_header {
   display: flex;
@@ -14,15 +16,76 @@ body{
   margin-bottom: 20px;
   justify-content: space-between;
 }
+
+.app_header > h1{ 
+  color: #fc3c3c;
+  font-size:2rem;
+}
 .app_left{
   flex:0.9;
+}
+.app_right h3{
+  padding:2px;
+  margin-top: 20px;
+  margin-bottom: -10px;
+  text-align: center;
+
 }
 .app_stats{
   display: flex;
   justify-content: space-between;
+}
+.app__information > h3 {
+  color: #6a5d5d;
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.app_graph{
+  flex-grow: 1;
+  margin-top:60px;
+  /* height:100%; */
+}
+.app__information > h3:last-of-type {
+  margin-top: 1rem;
 }
 @media (max-width:990px){
   .App{
     flex-direction: column;
   }
 }
+.footer{
+  width: 100%;
+  height:200px;
+  position: absolute;
+  bottom: 0;
+  background-color: #bdd4e7;
+  background-image: linear-gradient(315deg, #bdd4e7 0%, #8693ab 74%);
+  
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.Love{
+  display: flex;
+
+}
+.c1{
+  margin-right: 1rem;
+  margin-top:0.5rem;
+  font-size: 1.5rem;
+}
+a{
+  text-decoration: none;
+}
+.c3{
+  margin-left: 1rem;
+  margin-top:0.5rem;
+  font-size: 1.5rem;
+}
+.fab{
+  color:black
+}
+.fa-heart{
+  color:red;
+} 
